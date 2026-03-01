@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h1>Contact Form</h1>
+<p>Fill in this form to contact the site owners.</p>
+
+<form method="POST" action="{{ url_for('contact') }}">
+  {{ form.csrf_token }}
+
+  <div class="mb-3">
+    {{ form.name.label(class="form-label") }} <span class="text-danger">(Required)</span>
+    {{ form.name(class="form-control") }}
+    {% if form.name.errors %}
+      <div class="text-danger small">
+        {% for error in form.name.errors %}{{ error }}{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.email.label(class="form-label") }} <span class="text-danger">(Required)</span>
+    {{ form.email(class="form-control") }}
+    {% if form.email.errors %}
+      <div class="text-danger small">
+        {% for error in form.email.errors %}{{ error }}{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.subject.label(class="form-label") }} <span class="text-danger">(Required)</span>
+    {{ form.subject(class="form-control") }}
+    {% if form.subject.errors %}
+      <div class="text-danger small">
+        {% for error in form.subject.errors %}{{ error }}{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.message.label(class="form-label") }} <span class="text-danger">(Required)</span>
+    {{ form.message(class="form-control", rows=5) }}
+    {% if form.message.errors %}
+      <div class="text-danger small">
+        {% for error in form.message.errors %}{{ error }}{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}
